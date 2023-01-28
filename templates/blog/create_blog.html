@@ -1,0 +1,54 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block create_blog %} 
+
+{% include 'blog/blog_nav.html'%}
+
+<div class="row container mt-4">
+    
+    <div class="col-lg-6 contact-form wow slideInUp" data-wow-delay="0.3s">
+        <div id="alertMessage"></div>
+        <div>
+        
+        </div>
+        <form id="contactForm" novalidate="novalidate" method="POST">
+            {% csrf_token %}
+            <div class="row gx-3">
+                <div class="col-md-12 control-group">
+                    <input type="text" name= "title" class="form-control border-0 bg-light px-4" id="title" placeholder="Your Title"
+                    required="required" data-validation-required-message="Please enter your title" style="height: 55px;">
+                    <p class="help-block text-danger"></p>
+                </div>
+                
+                <div class="col-md-12 control-group">
+                    <select id="inputState" name="category" class="form-control border-0 bg-light">
+                        {% for cat in category %}
+                        <option>{{cat.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-12 control-group mt-3">
+                    <textarea name="body" class="form-control border-0 bg-light px-4 py-4" rows="4" id="message" placeholder="Description"
+                    required="required"
+                    data-validation-required-message="Description"></textarea>
+                    <p class="help-block text-danger"></p>
+                </div>
+
+
+                <div class="col-12 control-group mt-3">
+                    <input name='image' class="form-control form-control-lg Border-0 bg-light" id="formFileLg" type="file">
+                </div>
+
+                <div class="col-12 mt-3">
+                    <button class="btn btn-primary w-100 py-3" type="submit" id="sendMessageButton">
+                        <span>POST</span>
+                        <div class="d-none spinner-border spinner-border-sm text-light ms-3" role="status"></div>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+</div>
+
+{% endblock %}
